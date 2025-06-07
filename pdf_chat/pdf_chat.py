@@ -6,7 +6,7 @@ import contextlib
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chroma import Chroma  # UPDATED IMPORT
+from langchain_chroma import Chroma
 from langchain_community.vectorstores import FAISS
 from langchain_community.llms import GPT4All
 from langchain.chains import ConversationalRetrievalChain
