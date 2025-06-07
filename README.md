@@ -29,12 +29,14 @@ MODEL_NAME=DeepSeek-R1-Distill-Llama-8B-Q4_0.gguf
    ```bash
    pip install -r requirements.txt
    pip install -U langchain-huggingface
+   pip install -U langchain-chroma
    ```
 2. Edit `pdf_chat_cfg.properties` as above.
 3. Run the script:
    ```bash
    python3 pdf_chat.py
    ```
+   - Use `--in_mem_db` for in-memory FAISS vector DB (no caching).
 4. Ask questions in the terminal about your PDFs!
 
 ## Notes
@@ -42,3 +44,10 @@ MODEL_NAME=DeepSeek-R1-Distill-Llama-8B-Q4_0.gguf
 - If CUDA libraries are missing, the LLM will run on CPU (with a warning).
 - All configuration is handled in the `.properties` file for easy portability.
 - For best results, use high-quality LLMs and ensure your PDFs are text-based (not just scanned images).
+
+## Recent Enhancements
+- **Chroma caching:** Chroma vector DB is only rebuilt if PDFs change; otherwise, a cached DB is loaded instantly.
+- **Manifest-based invalidation:** Uses PDF filenames, sizes, and mtimes to detect changes.
+- **FAISS option:** Use `--in_mem_db` flag for in-memory (no-persistence) vector DB.
+- **Noisy CUDA errors suppressed:** All native backend CUDA errors are now fully hidden during LLM load; only a clear Python warning is shown if CUDA is missing.
+- **Chroma import updated:** Now uses `langchain_chroma` to avoid deprecation warnings.
